@@ -36,13 +36,41 @@ public class KafkaConfig {
     }
 
     @Bean
-    public NewTopic newTopic(){
+    public NewTopic topicFindBook(){
         return TopicBuilder
-                .name("book-topic")
-                .partitions(4)
+                .name("topic-find")
+                .partitions(3)
                 .replicas(3)
                 .build();
     }
+
+    @Bean
+    public NewTopic topicAddBook(){
+        return TopicBuilder
+                .name("topic-add")
+                .partitions(3)
+                .replicas(3)
+                .build();
+    }
+
+    @Bean
+    public NewTopic topicEditBook(){
+        return TopicBuilder
+                .name("topic-edit")
+                .partitions(3)
+                .replicas(3)
+                .build();
+    }
+
+    @Bean
+    public NewTopic topicDeleteBook(){
+        return TopicBuilder
+                .name("topic-delete")
+                .partitions(3)
+                .replicas(3)
+                .build();
+    }
+
 
     @Bean
     KafkaTemplate<String, Object> kafkaTemplate (){
