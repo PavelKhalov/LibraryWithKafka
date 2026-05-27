@@ -42,7 +42,8 @@ public class BookServiceImpl implements BookService{
     @Override
     public String findBookById(String id) {
         log.info("try send message about what need find book by id");
-        var event = new FindBookEvent(id);
+        String messageId = UUID.randomUUID().toString();
+        var event = new FindBookEvent(messageId,id);
 
         ProducerRecord record = new ProducerRecord<>("book-topic", event);
 

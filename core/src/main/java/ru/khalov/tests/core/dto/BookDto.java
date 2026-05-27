@@ -1,4 +1,4 @@
-package ru.khalov.tests.bookfindmicroservice.service.dto;
+package ru.khalov.tests.core.dto;
 
 public record BookDto(
         String title,

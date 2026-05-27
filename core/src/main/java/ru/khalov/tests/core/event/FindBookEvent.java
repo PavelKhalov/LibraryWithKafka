@@ -1,24 +1,22 @@
 package ru.khalov.tests.core.event;
 
 public class FindBookEvent {
+    private String messageId;
     private String bookId;
-    private String title;
 
     public FindBookEvent (){}
 
-    public FindBookEvent(String bookId){
+    public FindBookEvent(String messageId, String bookId){
+        this.messageId = messageId;
         this.bookId = bookId;
     }
-    public FindBookEvent(String bookId, String title){
-        this.bookId = bookId;
-        this.title = title;
+
+    public String getMessageId(){
+        return messageId;
     }
 
     public String getBookId() {
         return bookId;
     }
 
-    public String getTitle() {
-        return title;
-    }
 }

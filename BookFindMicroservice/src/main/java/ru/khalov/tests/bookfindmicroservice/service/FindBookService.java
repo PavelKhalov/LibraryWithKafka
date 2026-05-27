@@ -1,11 +1,8 @@
 package ru.khalov.tests.bookfindmicroservice.service;
 
-import ru.khalov.tests.bookfindmicroservice.model.Book;
-import ru.khalov.tests.bookfindmicroservice.service.dto.BookDto;
-
-import java.util.List;
+import ru.khalov.tests.core.event.FindBookEvent;
 
 public interface FindBookService {
-    List<BookDto> findAllBook();
-    BookDto findById(Long id);
+    void findAllBook(FindBookEvent event);
+    void findById(FindBookEvent event);
 }

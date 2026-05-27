@@ -2,7 +2,7 @@ package ru.khalov.tests.bookfindmicroservice.mapper;
 
 import org.springframework.stereotype.Component;
 import ru.khalov.tests.bookfindmicroservice.entity.BookEntity;
-import ru.khalov.tests.bookfindmicroservice.service.dto.BookDto;
+import ru.khalov.tests.core.dto.BookDto;
 
 @Component
 public class Mapper {

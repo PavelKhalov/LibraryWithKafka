@@ -72,6 +72,14 @@ public class KafkaConfig {
     }
 
     @Bean
+    public NewTopic topicAcceptResponse(){
+        return TopicBuilder
+                .name("topic-accept-responce")
+                .partitions(3)
+                .build();
+    }
+
+    @Bean
     KafkaTemplate<String, Object> kafkaTemplate (){
         return new KafkaTemplate<>(producerFactory());
     }
