@@ -1,4 +1,10 @@
 package ru.khalov.tests.bookfindmicroservice.repository;
 
-public class BookRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import ru.khalov.tests.bookfindmicroservice.entity.BookEntity;
+
+@Repository
+public interface BookRepository extends JpaRepository<BookEntity, Long> {
+
 }
