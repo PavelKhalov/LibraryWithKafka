@@ -8,7 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="core" />
       </profile>
-      <profile name="Annotation profile for BookService" enabled="true">
+      <profile name="Annotation profile for BookAddMicroservice" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -16,11 +16,14 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
         </processorPath>
         <module name="BookService" />
-        <module name="BookFindMicroservice" />
+        <module name="BookUpdateMicroservice" />
         <module name="BookDeleteMicroservice" />
         <module name="BookAddMicroservice" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="BookFindMicroservice" target="26" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
@@ -28,6 +31,7 @@
       <module name="BookDeleteMicroservice" options="-parameters" />
       <module name="BookFindMicroservice" options="-parameters" />
       <module name="BookService" options="-parameters" />
+      <module name="BookUpdateMicroservice" options="-parameters" />
       <module name="core" options="-parameters" />
     </option>
   </component>

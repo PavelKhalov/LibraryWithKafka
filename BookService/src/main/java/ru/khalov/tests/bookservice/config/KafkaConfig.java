@@ -20,7 +20,7 @@ import java.util.Map;
 @Configuration
 public class KafkaConfig {
 
-    @Value("${spring.kafka.consumer.bootstrap-servers}")
+    @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
 
     @Bean
@@ -40,23 +40,14 @@ public class KafkaConfig {
         return new DefaultKafkaProducerFactory<>(config);
     }
 
-    @Bean
-    public NewTopic topicFindBook(){
-        return TopicBuilder
-                .name("topic-find")
-                .partitions(3)
-                .replicas(2)
-                .config(TopicConfig.MIN_IN_SYNC_REPLICAS_CONFIG, "2")
-                .build();
-    }
 
     @Bean
     public NewTopic topicAddBook(){
         return TopicBuilder
                 .name("topic-add")
                 .partitions(3)
-                .replicas(2)
-                .config(TopicConfig.MIN_IN_SYNC_REPLICAS_CONFIG, "2")
+                .replicas(1)
+                .config(TopicConfig.MIN_IN_SYNC_REPLICAS_CONFIG, "1")
                 .build();
     }
 
@@ -65,8 +56,8 @@ public class KafkaConfig {
         return TopicBuilder
                 .name("topic-edit")
                 .partitions(3)
-                .replicas(2)
-                .config(TopicConfig.MIN_IN_SYNC_REPLICAS_CONFIG, "2")
+                .replicas(1)
+                .config(TopicConfig.MIN_IN_SYNC_REPLICAS_CONFIG, "1")
                 .build();
     }
 
@@ -75,19 +66,11 @@ public class KafkaConfig {
         return TopicBuilder
                 .name("topic-delete")
                 .partitions(3)
-                .replicas(2)
-                .config(TopicConfig.MIN_IN_SYNC_REPLICAS_CONFIG, "2")
+                .replicas(1)
+                .config(TopicConfig.MIN_IN_SYNC_REPLICAS_CONFIG, "1")
                 .build();
     }
 
-    @Bean
-    public NewTopic topicAcceptResponse(){
-        return TopicBuilder
-                .name("topic-accept-responce")
-                .replicas(2)
-                .config(TopicConfig.MIN_IN_SYNC_REPLICAS_CONFIG, "2")
-                .build();
-    }
 
     @Bean
     KafkaTemplate<String, Object> kafkaTemplate (){

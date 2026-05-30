@@ -3,16 +3,14 @@ package ru.khalov.tests.bookservice.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.ProducerRecord;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 import ru.khalov.tests.core.dto.BookDto;
 import ru.khalov.tests.core.event.AddBookEvent;
 import ru.khalov.tests.core.event.DeleteBookEvent;
+import ru.khalov.tests.core.event.EditBookEvent;
 import ru.khalov.tests.core.event.FindBookEvent;
 import org.springframework.kafka.support.SendResult;
-import ru.khalov.tests.core.responce.BookResponseEvent;
 
 import java.util.List;
 import java.util.UUID;
@@ -81,7 +79,25 @@ public class BookServiceImpl implements BookService{
 
     @Override
     public String updateBook(Long id, BookDto dto) {
-        return null;
+        var event = new EditBookEvent(
+                String.valueOf(id),
+                dto.title(),
+                dto.author(),
+                dto.genre(),
+                dto.yearRelease());
+
+        String messageId = UUID.randomUUID().toString();
+
+        CompletableFuture<SendResult<String, Object>> future = kafkaTemplate.send("topic-edit", messageId, event);
+        future.whenComplete((result, exception) -> {
+            if(exception != null){
+                log.error("Send message unsuccessfully");
+            } else{
+                log.info("Send message successfully");
+            }
+        });
+
+        return messageId;
     }
 
     @Override
@@ -100,13 +116,4 @@ public class BookServiceImpl implements BookService{
         });
         return id.toString();
     }
-
-
-    @KafkaListener(topics = "topic-accept-responce", containerFactory = "containerFactory")
-    public String acceptMessage (
-            @Payload BookResponseEvent bookResponseEvent
-    ) {
-        return bookResponseEvent.toString();
-    }
-
 }

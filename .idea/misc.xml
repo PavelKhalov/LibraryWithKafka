@@ -9,7 +9,13 @@
         <option value="$PROJECT_DIR$/BookAddMicroservice/pom.xml" />
         <option value="$PROJECT_DIR$/BookFindMicroservice/pom.xml" />
         <option value="$PROJECT_DIR$/BookDeleteMicroservice/pom.xml" />
+        <option value="$PROJECT_DIR$/BookUpdateMicroservice/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/BookFindMicroservice/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="openjdk-26" project-jdk-type="JavaSDK">

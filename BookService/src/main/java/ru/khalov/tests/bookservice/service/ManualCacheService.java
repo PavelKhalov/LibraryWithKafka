@@ -27,7 +27,7 @@ public class ManualCacheService {
         bookRepository.findAll().forEach(book -> {
             try{
                 String json = objectMapper.writeValueAsString(book);
-                redisTemplate.opsForValue().set("book"+book.getId(), json);
+                redisTemplate.opsForValue().set("book:"+book.getId(), json);
             } catch (Exception e){
                 log.error(e.getMessage());
                 throw new RuntimeException();

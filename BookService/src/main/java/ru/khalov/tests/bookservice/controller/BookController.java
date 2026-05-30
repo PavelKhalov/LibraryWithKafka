@@ -19,7 +19,7 @@ public class BookController {
     private final BookServiceImpl bookService;
     private final ManualCacheService cacheService;
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<String>> findAllBook(){
         log.info("Find all books from cache");
         return ResponseEntity.status(HttpStatus.OK).body(cacheService.findAll());
@@ -29,12 +29,21 @@ public class BookController {
     public ResponseEntity<String> createBook(@RequestBody BookDto bookDto) {
         log.info("Called method createBook in controller");
         bookService.createBook(bookDto);
-        return  null;
+        return ResponseEntity.status(HttpStatus.CREATED).body("заглушка");
+    }
+
+    @PostMapping("/{id}/update")
+    public ResponseEntity<String> updateBook(@RequestBody BookDto bookDto,
+                                             @PathVariable Long id){
+        log.info("Called method updateBook from controller");
+        bookService.updateBook(id, bookDto);
+
+        return ResponseEntity.ok().body(String.valueOf(id));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<String> findBookById(@PathVariable Long id){
         log.info("Find book with id: {} in cache", id);
-        return ResponseEntity.status(HttpStatus.FOUND).body(cacheService.findById(id));
+        return ResponseEntity.status(HttpStatus.OK).body(cacheService.findById(id));
     }
 }

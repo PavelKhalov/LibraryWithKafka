@@ -10,4 +10,7 @@ public class DeleteBookEvent {
         this.bookId = bookId;
     }
 
+    public String getBookId() {
+        return bookId;
+    }
 }

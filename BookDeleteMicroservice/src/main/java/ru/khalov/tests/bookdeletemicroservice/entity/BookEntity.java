@@ -1,14 +1,18 @@
-package ru.khalov.tests.bookservice.entity;
+package ru.khalov.tests.bookdeletemicroservice.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "book")
 @Getter
 @Setter
-public class Book {
+@AllArgsConstructor
+@NoArgsConstructor
+public class BookEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

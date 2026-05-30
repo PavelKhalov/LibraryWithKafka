@@ -1,4 +1,4 @@
-package ru.khalov.tests.bookfindmicroservice.entity;
+package ru.khalov.tests.bookupdatemicroservice.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,20 +6,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Entity
+@Table(name = "book")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name="book")
+@AllArgsConstructor
 public class BookEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "title", nullable = false, updatable = false)
+    @Column(name = "title", nullable = false)
     private String title;
 
     @Column(name = "author", nullable = false)
