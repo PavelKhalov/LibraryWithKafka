@@ -4,11 +4,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.khalov.tests.bookservice.service.BookServiceImpl;
+import ru.khalov.tests.bookservice.service.ManualCacheService;
+import ru.khalov.tests.core.dto.BookDto;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -16,17 +17,24 @@ import ru.khalov.tests.bookservice.service.BookServiceImpl;
 @RequiredArgsConstructor
 public class BookController {
     private final BookServiceImpl bookService;
+    private final ManualCacheService cacheService;
 
     @GetMapping
-    public ResponseEntity<String> findAllBook(){
-        log.info("Called method findAllBook from controller (provider in kafka)");
+    public ResponseEntity<List<String>> findAllBook(){
+        log.info("Find all books from cache");
+        return ResponseEntity.status(HttpStatus.OK).body(cacheService.findAll());
+    }
 
-        return ResponseEntity.status(HttpStatus.OK).body(String.valueOf(bookService.findAllBook()));
+    @PostMapping("/create")
+    public ResponseEntity<String> createBook(@RequestBody BookDto bookDto) {
+        log.info("Called method createBook in controller");
+        bookService.createBook(bookDto);
+        return  null;
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<String> findBookById(@PathVariable ("id") Long id){
-        log.info("Called method findBookById from controller (provider in kafka)");
-        return ResponseEntity.status(HttpStatus.FOUND).body(bookService.findBookById(String.valueOf(id)));
+    public ResponseEntity<String> findBookById(@PathVariable Long id){
+        log.info("Find book with id: {} in cache", id);
+        return ResponseEntity.status(HttpStatus.FOUND).body(cacheService.findById(id));
     }
 }

@@ -38,7 +38,7 @@ public class FindBookServiceImpl implements FindBookService{
     }
 
     @Override
-    @KafkaListener(topics = "find-topic", groupId = "${spring.kafka.consumer.group-id}")
+    @KafkaListener(topics = "topic-find", groupId = "${spring.kafka.consumer.group-id}")
     public void findById(FindBookEvent event) {
         log.info("received event: find book by id");
         BookDto dto = mapper.toDto(bookRepository.findById(Long.parseLong(event.getBookId())).orElseThrow(EntityNotFoundException::new));

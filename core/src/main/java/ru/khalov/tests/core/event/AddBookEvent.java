@@ -1,7 +1,6 @@
 package ru.khalov.tests.core.event;
 
 public class AddBookEvent {
-    private String bookId;
     private String title;
     private String author;
     private String genre;
@@ -10,20 +9,11 @@ public class AddBookEvent {
     public AddBookEvent() {
     }
 
-    public AddBookEvent(String bookId, String title, String author, String genre, Integer yearRelease) {
-        this.bookId = bookId;
+    public AddBookEvent(String title, String author, String genre, Integer yearRelease) {
         this.title = title;
         this.author = author;
         this.genre = genre;
         this.yearRelease = yearRelease;
-    }
-
-    public String getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(String bookId) {
-        this.bookId = bookId;
     }
 
     public String getTitle() {
