@@ -20,9 +20,9 @@ public class BookService {
 
 
     @Transactional(readOnly = false)
-    @KafkaListener(topics = "topic-edit")
+    @KafkaListener(topics = "topic-edit", containerFactory = "containerFactory")
     public void editBook(EditBookEvent event){
-
+        log.info("start edit book with id: {}", event.getBookId());
         var bookOnSave = new BookEntity(
                 Long.parseLong(event.getBookId()),
                 event.getTitle(),
@@ -32,6 +32,7 @@ public class BookService {
         );
 
         bookRepository.save(bookOnSave);
+        log.info("Edit book with id:{}, successfully", event.getBookId());
     }
 
 }

@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.khalov.tests.core.dto.BookDto;
 import ru.khalov.tests.core.event.AddBookEvent;
 import ru.khalov.tests.core.event.DeleteBookEvent;

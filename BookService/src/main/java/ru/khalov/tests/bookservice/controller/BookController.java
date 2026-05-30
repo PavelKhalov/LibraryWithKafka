@@ -32,6 +32,13 @@ public class BookController {
         return ResponseEntity.status(HttpStatus.CREATED).body("заглушка");
     }
 
+    @DeleteMapping("/{id}/delete")
+    public ResponseEntity<Void> deleteBook(@PathVariable Long id){
+        log.info("Called method deleteBoook from controller");
+        bookService.deleteBook(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
     @PostMapping("/{id}/update")
     public ResponseEntity<String> updateBook(@RequestBody BookDto bookDto,
                                              @PathVariable Long id){

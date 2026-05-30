@@ -16,8 +16,8 @@ public class BookService {
 
     private final BookRepository bookRepository;
 
-    @Transactional
-    @KafkaListener(topics = "topic-add")
+
+    @KafkaListener(topics = "topic-add", containerFactory = "containerFactory")
     public void addBook(AddBookEvent event){
         log.info("start method add book in microservice");
 
@@ -25,8 +25,14 @@ public class BookService {
         book.setTitle(event.getTitle());
         book.setAuthor(event.getAuthor());
         book.setGenre(event.getGenre());
-        book.setYearRelease(book.getYearRelease());
+        book.setYearRelease(event.getYearRelease());
+        try {
+            bookRepository.save(book);
+            log.info("book save successfully");
+        } catch (Exception e){
+            log.error("Error to save book: {}", e.getMessage());
+            throw e;
+        }
 
-        bookRepository.save(book);
     }
 }

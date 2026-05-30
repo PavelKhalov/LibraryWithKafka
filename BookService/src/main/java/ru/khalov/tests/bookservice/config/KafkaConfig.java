@@ -31,7 +31,7 @@ public class KafkaConfig {
         config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JacksonJsonSerializer.class);
 
         config.put(ProducerConfig.LINGER_MS_CONFIG, 0);
-        config.put(ProducerConfig.DELIVERY_TIMEOUT_MS_CONFIG, 5000);
+        config.put(ProducerConfig.DELIVERY_TIMEOUT_MS_CONFIG, 300000);
         config.put(ProducerConfig.REQUEST_TIMEOUT_MS_CONFIG, 10000);
 
         config.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);
