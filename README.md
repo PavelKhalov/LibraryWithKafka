@@ -1,3 +1,5 @@
-<img width="1527" height="695" alt="изображение" src="https://github.com/user-attachments/assets/696938f1-e513-41be-b97d-056d525efd32" />
+<img width="1301" height="598" alt="изображение" src="https://github.com/user-attachments/assets/fdb2498b-787c-4735-bc07-d30287d49393" />
+
 
 rewrite my main pet project (library) on microservice 
+add redis for faster get book from db
