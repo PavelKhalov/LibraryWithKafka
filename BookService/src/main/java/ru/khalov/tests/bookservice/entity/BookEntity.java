@@ -3,11 +3,13 @@ package ru.khalov.tests.bookservice.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "book")
 @Getter
 @Setter
+@ToString
 public class BookEntity {
 
     @Id

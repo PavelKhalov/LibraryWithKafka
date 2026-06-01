@@ -4,8 +4,10 @@ import jakarta.annotation.PostConstruct;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
+import ru.khalov.tests.bookservice.entity.BookEntity;
 import ru.khalov.tests.bookservice.repository.BookRepository;
 import tools.jackson.databind.ObjectMapper;
 
@@ -18,16 +20,14 @@ import java.util.Set;
 public class ManualCacheService {
 
     private final BookRepository bookRepository;
-    private final StringRedisTemplate redisTemplate;
+    private final RedisTemplate<String, BookEntity> redisTemplate;
     private final ObjectMapper objectMapper;
-
 
     @PostConstruct
     public void init() {
         bookRepository.findAll().forEach(book -> {
             try{
-                String json = objectMapper.writeValueAsString(book);
-                redisTemplate.opsForValue().set("book:"+book.getId(), json);
+                redisTemplate.opsForValue().set("book:"+book.getId(), book);
             } catch (Exception e){
                 log.error(e.getMessage());
                 throw new RuntimeException();
@@ -43,17 +43,17 @@ public class ManualCacheService {
             return List.of();
         }
 
-        List<String> books = redisTemplate.opsForValue().multiGet(keys);
+        List<BookEntity> books = redisTemplate.opsForValue().multiGet(keys);
         if(books == null){
             return List.of();
         }
 
-        return books;
+        return books.toString().lines().toList();
     }
 
-    public String findById(Long id){
+    public BookEntity findById(Long id){
         log.info("find book with id = {} in cache", id);
-        String objFromCache = redisTemplate.opsForValue().get("book:" + id); //Json формат
+        var objFromCache = redisTemplate.opsForValue().get("book:" + id); //Json формат
 
         if(objFromCache != null) {
             log.info("Book with id = {} founded", id);

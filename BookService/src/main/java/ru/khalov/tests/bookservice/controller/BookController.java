@@ -51,6 +51,6 @@ public class BookController {
     @GetMapping("/{id}")
     public ResponseEntity<String> findBookById(@PathVariable Long id){
         log.info("Find book with id: {} in cache", id);
-        return ResponseEntity.status(HttpStatus.OK).body(cacheService.findById(id));
+        return ResponseEntity.status(HttpStatus.OK).body(cacheService.findById(id).toString());
     }
 }
