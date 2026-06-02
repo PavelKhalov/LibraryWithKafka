@@ -2,4 +2,4 @@
 
 
 rewrite my main pet project (library) on microservice,  
-add redis for faster get book from db, but redis go in db only when project start work, radis is not updated when the servise work, but I'll fix it later.
+add redis for faster get/update/add/delete book
