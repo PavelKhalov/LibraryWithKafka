@@ -1,5 +1,6 @@
 package ru.khalov.tests.bookservice.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import ru.khalov.tests.core.dto.BookDto;
 
 import java.util.List;
 
+@Tag(name = "All methods of book controller")
 @Slf4j
 @RestController
 @RequestMapping("/book")

@@ -3,13 +3,11 @@ package ru.khalov.tests.bookaddmicroservice.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import ru.khalov.tests.bookaddmicroservice.entity.BookEntity;
 import ru.khalov.tests.bookaddmicroservice.repository.BookRepository;
 import ru.khalov.tests.core.event.AddBookEvent;
-import tools.jackson.databind.ObjectMapper;
 
 @Slf4j
 @RequiredArgsConstructor
